@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const port = 3030;
-
+const PORT = process.env.PORT || 3030;  
+const port = PORT;
 // Middleware per parsejar el cos de les sol·licituds a JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
