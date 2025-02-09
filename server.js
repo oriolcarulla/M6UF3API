@@ -113,6 +113,7 @@ app.delete('/users/:id', async (req, res) => {
 });
 
 // Inicia el servidor
+alert("WORKING");
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
