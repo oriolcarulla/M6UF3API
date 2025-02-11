@@ -1,10 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const port = process.env.PORT || 3030;  
+const port = process.env.PORT || 3030;
 // Middleware per parsejar el cos de les sol·licituds a JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 // Connecta't a MongoDB (modifica l'URI amb la teva pròpia cadena de connexió)
 mongoose.connect('mongodb+srv://agarci9:Castellet25@cluster0.gc1mk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
