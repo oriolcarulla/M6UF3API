@@ -1,8 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 3030;  
-const port = PORT;
+const port = process.env.PORT || 3030;  
 // Middleware per parsejar el cos de les sol·licituds a JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,18 +17,11 @@ const userSchema = new mongoose.Schema({
   email: String
 });
 
-
 const User = mongoose.model('User', userSchema);
 
-// Ruta per crear un nou usuari
+
 app.post('/users', async (req, res) => {
   /// res.status(200).json(req.body);
-
-  console.log(req.body);
-  console.log(req.params);
-  console.log(req.query)
-  console.log(req.headers)
-
   // Check if request body is empty and fill with default values
   if (!req.body.name || !req.body.email) {
     req.body.name = req.body.name || "err";
@@ -44,9 +36,6 @@ app.post('/users', async (req, res) => {
     res.status(400).json({ message: 'Error creating user', error: err.message });
   }
 });
-
-
-
 
 // Ruta per obtenir tots els usuaris
 app.get('/users', async (req, res) => {
