@@ -46,17 +46,6 @@ app.post('/users', async (req, res) => {
 });
 
 
-// Ruta per crear un nou usuari
-app.get('/cusers', async (req, res) => {
-  //const { 'name':name, 'email': email } = req.body;
-  try {
-    const user = new User({ name:'1111',email:'2222' });    
-    await user.save();
-    res.status(201).json(user);
-  } catch (err) {
-    res.status(400).json({ message: 'Error creating user', error: err.message });
-  }
-});
 
 
 // Ruta per obtenir tots els usuaris
