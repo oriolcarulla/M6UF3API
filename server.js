@@ -2,35 +2,36 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 3030;
-// Middleware per parsejar el cos de les sol·licituds a JSON
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-// Connecta't a MongoDB (modifica l'URI amb la teva pròpia cadena de connexió)
-mongoose.connect('mongodb+srv://agarci9:Castellet25@cluster0.gc1mk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://oriolcarulla:6177@tasques.vpyz0.mongodb.net/Activitat3?retryWrites=true&w=majority&appName=Tasques', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.log('Error connecting to MongoDB:', err));
 
-// Definició del model de dades (un exemple simple d'un model de "Usuari")
-const userSchema = new mongoose.Schema({
-  name: String,
-  email: String
+const UserSchema = new mongoose.Schema({
+  _id: String,
+  nom_usuari: String,
+  seguidors: Number,
+  verificat: Boolean
 });
 
-const User = mongoose.model('User', userSchema);
-
+const User = mongoose.model('User', UserSchema, 'Usuaris');
 
 app.post('/users', async (req, res) => {
-  /// res.status(200).json(req.body);
-  // Check if request body is empty and fill with default values
-  if (!req.body.name || !req.body.email) {
-    req.body.name = req.body.name || "err";
-    req.body.email = req.body.email || "err";
+  if (!req.body.nom_usuari || !req.body._id) {
+    req.body.nom_usuari = req.body.nom_usuari || "err";
+    req.body._id = req.body._id || "err";
   }
 
   try {
-    const user = new User({ name: req.body.name, email: req.body.email });
+    const user = new User({
+      _id: req.body._id,
+      nom_usuari: req.body.nom_usuari,
+      seguidors: req.body.seguidors,
+      verificat: req.body.verificat
+    });
     await user.save();
     res.status(201).json(user);
   } catch (err) {
@@ -38,7 +39,6 @@ app.post('/users', async (req, res) => {
   }
 });
 
-// Ruta per obtenir tots els usuaris
 app.get('/users', async (req, res) => {
   try {
     const users = await User.find();
@@ -48,7 +48,6 @@ app.get('/users', async (req, res) => {
   }
 });
 
-// Ruta per obtenir un usuari per ID
 app.get('/users/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -62,12 +61,11 @@ app.get('/users/:id', async (req, res) => {
   }
 });
 
-// Ruta per actualitzar un usuari per ID
 app.put('/users/:id', async (req, res) => {
   const { id } = req.params;
-  const { name, email } = req.body;
+  const { nom_usuari, seguidors, verificat } = req.body;
   try {
-    const user = await User.findByIdAndUpdate(id, { name, email }, { new: true });
+    const user = await User.findByIdAndUpdate(id, { nom_usuari, seguidors, verificat }, { new: true });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -77,7 +75,6 @@ app.put('/users/:id', async (req, res) => {
   }
 });
 
-// Ruta per eliminar un usuari per ID
 app.delete('/users/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -90,8 +87,6 @@ app.delete('/users/:id', async (req, res) => {
     res.status(500).json({ message: 'Error deleting user', error: err.message });
   }
 });
-
-// Inicia el servidorxºxºz  
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
