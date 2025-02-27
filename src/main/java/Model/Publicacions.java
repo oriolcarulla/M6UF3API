@@ -2,32 +2,32 @@ package Model;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Publicacions {
     private String id;
     private String text;
-    private ArrayList<String> hashtags;
-    private ArrayList<String> mencions;
-    private ArrayList<String> paraules_clau;
+    private List<String> hastags;
+    private List<String> mencions;
+    private List<String> paraules_clau;
     private String data_hora;
-    private Long likes;
-    private Long retweets;
+    private int likes;
+    private int retuits;
     private String ubicacio;
     private String sentiment;
     private String usuari_id;
 
     public Publicacions(){}
 
-    public Publicacions(String id, String text, ArrayList<String> hashtags, ArrayList<String> mencions, ArrayList<String> paraules_clau, String data_hora, Long likes, Long retweets, String ubicacio, String sentiment, String usuari_id) {
+    public Publicacions(String id, String text, List<String> hastags, List<String> mencions, List<String> paraules_clau, String data_hora, int likes, int retuits, String ubicacio, String sentiment, String usuari_id) {
         this.id = id;
         this.text = text;
-        this.hashtags = hashtags;
+        this.hastags = hastags;
         this.mencions = mencions;
         this.paraules_clau = paraules_clau;
         this.data_hora = data_hora;
         this.likes = likes;
-        this.retweets = retweets;
+        this.retuits = retuits;
         this.ubicacio = ubicacio;
         this.sentiment = sentiment;
         this.usuari_id = usuari_id;
@@ -40,23 +40,23 @@ public class Publicacions {
     public String getText() {
         return text;
     }
-    public ArrayList<String> getHashtags() {
-        return hashtags;
+    public List<String> getHastags() {
+        return hastags;
     }
-    public ArrayList<String> getMencions() {
+    public List<String> getMencions() {
         return mencions;
     }
-    public ArrayList<String> getParaules_clau() {
+    public List<String> getParaules_clau() {
         return paraules_clau;
     }
     public String getData_hora() {
         return data_hora;
     }
-    public Long getLikes() {
+    public int getLikes() {
         return likes;
     }
-    public Long getRetweets() {
-        return retweets;
+    public int getRetuits() {
+        return retuits;
     }
     public String getUbicacio() {
         return ubicacio;
@@ -74,23 +74,23 @@ public class Publicacions {
     public void setText(String text) {
         this.text = text;
     }
-    public void setHashtags(ArrayList<String> hashtags) {
-        this.hashtags = hashtags;
+    public void setHastags(List<String> hastags) {
+        this.hastags = hastags;
     }
-    public void setMencions(ArrayList<String> mencions) {
+    public void setMencions(List<String> mencions) {
         this.mencions = mencions;
     }
-    public void setParaules_clau(ArrayList<String> paraules_clau) {
+    public void setParaules_clau(List<String> paraules_clau) {
         this.paraules_clau = paraules_clau;
     }
     public void setData_hora(String data_hora) {
         this.data_hora = data_hora;
     }
-    public void setLikes(Long likes) {
+    public void setLikes(int likes) {
         this.likes = likes;
     }
-    public void setRetweets(Long retweets) {
-        this.retweets = retweets;
+    public void setRetuits(int retuits) {
+        this.retuits = retuits;
     }
     public void setUbicacio(String ubicacio) {
         this.ubicacio = ubicacio;
@@ -106,12 +106,12 @@ public class Publicacions {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", this.id);
         jsonObject.put("text", this.text);
-        jsonObject.put("hashtags", this.hashtags);
+        jsonObject.put("hashtags", this.hastags);
         jsonObject.put("mencions", this.mencions);
         jsonObject.put("paraules_clau", this.paraules_clau);
         jsonObject.put("data_hora", this.data_hora);
         jsonObject.put("likes", this.likes);
-        jsonObject.put("retweets", this.retweets);
+        jsonObject.put("retweets", this.retuits);
         jsonObject.put("ubicacio", this.ubicacio);
         jsonObject.put("sentiment", this.sentiment);
         jsonObject.put("usuari_id", this.usuari_id);
